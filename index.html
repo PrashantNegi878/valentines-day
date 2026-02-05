@@ -20,7 +20,6 @@
             overflow: hidden; 
         }
 
-        /* Floating Hearts Background */
         .bg-hearts {
             position: absolute;
             top: 0;
@@ -43,7 +42,7 @@
             100% { transform: translateY(-1000px) rotate(360deg); opacity: 0; }
         }
 
-        /* --- Main Card Container --- */
+        /* --- Main Card --- */
         .card {
             background: rgba(255, 255, 255, 0.4);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
@@ -64,22 +63,16 @@
             transition: all 0.5s ease;
         }
 
-        /* Hide Scrollbars */
         .card::-webkit-scrollbar { display: none; }
         .card { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* --- Typography & Text Animations --- */
         h1 {
             font-family: 'Dancing Script', cursive;
             color: #d63384;
             font-size: 2.2rem;
             margin: 0 0 10px 0;
             line-height: 1.2;
-            /* Transition setup for the magic effect */
             transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
         }
 
         p {
@@ -91,49 +84,60 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Transition setup for the magic effect */
             transition: opacity 0.5s ease, transform 0.5s ease, filter 0.5s ease;
-            opacity: 1;
-            transform: translateY(0);
-            filter: blur(0);
         }
 
-        /* The class we add to hide text smoothly */
-        .hide-text {
-            opacity: 0;
-            transform: translateY(10px); /* Moves down slightly */
-            filter: blur(5px); /* Blurs out */
-        }
-
-        /* The Sparkle/Glow Animation for when text appears */
-        .sparkle-effect {
-            animation: textGlow 1.5s ease-out;
-        }
-
+        /* Text Magic Animations */
+        .hide-text { opacity: 0; transform: translateY(10px); filter: blur(5px); }
+        .sparkle-effect { animation: textGlow 1.5s ease-out; }
         @keyframes textGlow {
             0% { text-shadow: 0 0 0 rgba(255, 105, 180, 0); }
             50% { text-shadow: 0 0 10px rgba(255, 105, 180, 0.5), 0 0 20px rgba(255, 105, 180, 0.3); color: #c9184a; }
             100% { text-shadow: 0 0 0 rgba(255, 105, 180, 0); }
         }
 
-
         /* --- Sections Visibility --- */
-        #slideshow-container, #proposal, #success-msg, #bonus-screen {
+        /* Everything hidden by default except logic decides what to show */
+        #slideshow-container, #proposal, #success-msg, #bonus-screen, #start-content {
             display: none;
             width: 100%;
             flex-direction: column;
             align-items: center;
         }
 
-        #start-screen {
-            display: flex; 
+        #countdown-container {
+            display: flex;
             flex-direction: column;
             align-items: center;
             width: 100%;
-            padding: 20px 0; 
         }
 
-        /* --- 3:4 Ratio Photo Frame (Main Slideshow) --- */
+        /* --- Countdown Styling --- */
+        #timer {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .time-box {
+            background: rgba(255, 255, 255, 0.6);
+            padding: 10px;
+            border-radius: 10px;
+            min-width: 50px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .time-val {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d63384;
+            display: block;
+        }
+        .time-label {
+            font-size: 0.7rem;
+            color: #555;
+            text-transform: uppercase;
+        }
+
+        /* --- Photos & Frames --- */
         .photo-frame {
             width: 100%;
             aspect-ratio: 3 / 4; 
@@ -158,11 +162,8 @@
             transition: opacity 1s ease-in-out; 
         }
 
-        .photo-frame img.active {
-            opacity: 1; 
-        }
+        .photo-frame img.active { opacity: 1; }
 
-        /* --- Buttons --- */
         .btn {
             background: #ff4d6d;
             color: white;
@@ -179,11 +180,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
-        .btn:hover {
-            transform: scale(1.02);
-            background: #ff2a4d;
-        }
+        .btn:hover { transform: scale(1.02); background: #ff2a4d; }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.8);
@@ -196,117 +193,30 @@
             white-space: normal; 
         }
         
-        /* --- Proposal Section --- */
-        .big-question {
-            font-size: 1.5rem;
-            color: #c9184a;
-            font-weight: bold;
-            margin: 10px 0; 
-            line-height: 1.3;
-        }
-
-        .satire {
-            font-size: 0.8rem;
-            color: #777;
-            font-style: italic;
-            margin-bottom: 15px;
-            min-height: auto; 
-            display: block;
-        }
-
-        .yes-btn {
-            font-size: 1.4rem;
-            padding: 12px 40px;
-            background: linear-gradient(45deg, #ff0055, #ff0099);
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.6);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        /* Confetti Canvas */
-        #confetti {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 100;
-        }
-
-        /* --- Final Screen Customizations --- */
-        #success-msg h1 {
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
-
-        /* Container for the Fading Slideshow (Final) */
-        .final-slideshow-container {
-            width: 100%;
-            aspect-ratio: 4 / 3; 
-            position: relative; 
-            margin-top: 5px;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 3px solid white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-
-        .final-img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0; 
-            transition: opacity 1.5s ease-in-out; 
-        }
-
-        .final-img.active {
-            opacity: 1; 
-        }
-
-        /* --- Bonus Screen Styling --- */
-        .funny-frame {
-            width: 100%;
-            max-height: 40vh;
-            border: 4px solid white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            overflow: hidden;
-            margin-bottom: 15px;
-            background: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        /* --- Specific Section Styling --- */
+        .big-question { font-size: 1.5rem; color: #c9184a; font-weight: bold; margin: 10px 0; line-height: 1.3; }
+        .satire { font-size: 0.8rem; color: #777; font-style: italic; margin-bottom: 15px; min-height: auto; display: block; }
+        .yes-btn { font-size: 1.4rem; padding: 12px 40px; background: linear-gradient(45deg, #ff0055, #ff0099); box-shadow: 0 0 20px rgba(255, 0, 85, 0.6); animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
         
-        .funny-frame img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; 
-            display: block;
-        }
+        /* Final & Bonus */
+        .final-slideshow-container { width: 100%; aspect-ratio: 4 / 3; position: relative; margin-top: 5px; border-radius: 10px; overflow: hidden; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .final-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out; }
+        .final-img.active { opacity: 1; }
+        .funny-frame { width: 100%; max-height: 40vh; border: 4px solid white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); overflow: hidden; margin-bottom: 15px; background: white; display: flex; justify-content: center; align-items: center; }
+        .funny-frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
 
-        /* --- MOBILE SPECIFIC TWEAKS (@media) --- */
+        /* Confetti */
+        #confetti { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }
+
         @media (max-width: 600px) {
-            .card {
-                width: 90%;
-                padding: 15px;
-            }
+            .card { width: 90%; padding: 15px; }
             h1 { font-size: 1.8rem; }
             .big-question { font-size: 1.3rem; }
             p { font-size: 0.9rem; }
             .btn { padding: 10px 20px; font-size: 0.95rem; }
             .emoji-big { font-size: 2.5rem !important; }
         }
-
     </style>
 </head>
 <body>
@@ -317,13 +227,25 @@
         
         <div id="start-screen">
             <h1>Hey Aakanksha...</h1>
-            <p>I wanted to make a little something special just for us. <br>Ready to see?</p>
-            <button class="btn" onclick="startJourney()">Open 💌</button>
+            
+            <div id="countdown-container">
+                <p>Patience, my love... <br>The surprise unlocks in:</p>
+                <div id="timer">
+                    <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
+                    <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
+                    <div class="time-box"><span class="time-val" id="mins">00</span><span class="time-label">Min</span></div>
+                    <div class="time-box"><span class="time-val" id="secs">00</span><span class="time-label">Sec</span></div>
+                </div>
+            </div>
+
+            <div id="start-content">
+                <p>I wanted to make a little something special just for us. <br>Ready to see?</p>
+                <button class="btn" onclick="startJourney()">Open 💌</button>
+            </div>
         </div>
 
         <div id="slideshow-container">
             <h1 id="header-text" class="text-element">Us ❤️</h1>
-            
             <div class="photo-frame">
                 <img src="img1.jpeg" class="active" alt="Us 1">
                 <img src="img2.jpeg" alt="Us 2">
@@ -331,7 +253,6 @@
                 <img src="img4.jpeg" alt="Us 4">
                 <img src="img5.jpeg" alt="Her">
             </div>
-            
             <p id="caption-text" class="text-element">To my darling Aakanksha, here’s a little trip down memory lane...</p>
             <button class="btn" onclick="nextSlide()" id="next-btn">Start, my sunshine ☀️</button>
         </div>
@@ -342,26 +263,20 @@
                 My Darling Aakanksha,<br>
                 Will you be my Valentine?
             </div>
-            
             <p class="satire">(Note: I removed the 'No' button because you literally can't back out now. You're stuck with me! 😜)</p>
-            
             <button class="btn yes-btn" onclick="acceptProposal()">YES! ❤️</button>
         </div>
 
         <div id="success-msg">
             <h1>Happy Valentine's Day,<br>my Valentine! ❤️</h1>
             <p style="font-size: 0.9rem; min-height: auto; margin-bottom: 5px;">You're the best thing that ever happened to me, wifey.</p>
-            
             <div class="emoji-big" style="font-size: 3rem; margin-bottom: 10px;">💑</div>
-
             <div class="final-slideshow-container">
                 <img src="final1.jpeg" alt="Final 1" class="final-img active">
                 <img src="final2.jpeg" alt="Final 2" class="final-img">
                 <img src="final3.jpeg" alt="Final 3" class="final-img">
             </div>
-
             <button class="btn btn-secondary" onclick="showBonus()">Wait, one last thing... 🤫</button>
-
         </div>
 
         <div id="bonus-screen">
@@ -372,27 +287,71 @@
             <p style="font-style: italic;">I love you even when you're like this! <br>(Actually, especially like this) 🤪❤️</p>
             <div style="font-size: 1.1rem; color: #d63384; font-weight: bold; margin-bottom: 20px;">Forever & Always.</div>
         </div>
-
     </div>
 
     <canvas id="confetti"></canvas>
 
     <script>
-        // --- Data Configuration ---
-        const buttonTexts = [
-            "Next, my baby girl 💕",   // Click 1 -> Goes to img2
-            "Go on, mi amor 💍",      // Click 2 -> Goes to img3
-            "Look here, sweetheart 😍",// Click 3 -> Goes to img4
-            "And the masterpiece... ✨", // Click 4 -> Goes to img5
-            "Ask me! 💘"               // Click 5 -> Proposal
-        ];
+        // ==========================
+        //  COUNTDOWN LOGIC
+        // ==========================
+        
+        // 1. Get current year
+        const currentYear = new Date().getFullYear();
+        
+        // 2. Set the target Date: Feb 14th, 00:00:00
+        // NOTE: Month is 0-indexed in JS (0 = Jan, 1 = Feb). So 1 is February.
+        let targetDate = new Date(currentYear, 1, 14, 0, 0, 0); 
+        
+        // --- TEST MODE ---
+        // Uncomment the line below to simulate that Valentine's Day has already passed (to test the site):
+        // targetDate = new Date(currentYear, 1, 1, 0, 0, 0); // Sets target to Feb 1st (Passed)
 
+        const countdownContainer = document.getElementById('countdown-container');
+        const startContent = document.getElementById('start-content');
+
+        function updateCountdown() {
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff <= 0) {
+                // Time is up! Show the button
+                countdownContainer.style.display = 'none';
+                startContent.style.display = 'flex';
+                clearInterval(timerInterval); // Stop the timer
+                return;
+            }
+
+            // Time is NOT up. Calculate days, hours, mins, secs
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(days).padStart(2, '0');
+            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('mins').innerText = String(minutes).padStart(2, '0');
+            document.getElementById('secs').innerText = String(seconds).padStart(2, '0');
+        }
+
+        // Run immediately, then every second
+        updateCountdown();
+        const timerInterval = setInterval(updateCountdown, 1000);
+
+
+        // ==========================
+        //  APP LOGIC
+        // ==========================
+        const buttonTexts = [
+            "Next, my baby girl 💕", "Go on, mi amor 💍", 
+            "Look here, sweetheart 😍", "And the masterpiece... ✨", "Ask me! 💘"
+        ];
         const captions = [
-            "To my darling Aakanksha, here’s a little trip down memory lane...", // Img 1
-            "Every smile we share makes my heart skip a beat, baby girl.",        // Img 2
-            "You are the sunshine that brightens up my whole world.",             // Img 3
-            "I'm so lucky to call you my sweetheart. Life is better with you.",   // Img 4
-            "But this... this is my favorite view. The most beautiful girl in the world." // Img 5
+            "To my darling Aakanksha, here’s a little trip down memory lane...",
+            "Every smile we share makes my heart skip a beat, baby girl.",
+            "You are the sunshine that brightens up my whole world.",
+            "I'm so lucky to call you my sweetheart. Life is better with you.",
+            "But this... this is my favorite view. The most beautiful girl in the world."
         ];
 
         let currentSlide = 0;
@@ -408,55 +367,32 @@
         const successMsg = document.getElementById('success-msg');
         const bonusScreen = document.getElementById('bonus-screen');
 
-        // --- Functions ---
-
         function startJourney() {
             startScreen.style.display = 'none';
             slideshowContainer.style.display = 'flex';
         }
 
         function nextSlide() {
-            // 1. Fade OUT the text
             captionText.classList.add('hide-text');
             headerText.classList.add('hide-text');
-            // Remove previous sparkle if active
             captionText.classList.remove('sparkle-effect');
             headerText.classList.remove('sparkle-effect');
 
-            // 2. Change Image (Fade out old)
             slides[currentSlide].classList.remove('active');
             currentSlide++;
 
             if (currentSlide < slides.length) {
-                // Fade IN new image
                 slides[currentSlide].classList.add('active');
-                
-                // 3. Wait 500ms for text to fade out fully, then update content and fade in
                 setTimeout(() => {
-                    // Update Button
-                    if (currentSlide - 1 < buttonTexts.length) {
-                        nextBtn.innerText = buttonTexts[currentSlide - 1];
-                    }
+                    if (currentSlide - 1 < buttonTexts.length) nextBtn.innerText = buttonTexts[currentSlide - 1];
+                    if (currentSlide < captions.length) captionText.innerText = captions[currentSlide];
+                    if (currentSlide === 4) headerText.innerText = "And finally...";
 
-                    // Update Caption
-                    if (currentSlide < captions.length) {
-                        captionText.innerText = captions[currentSlide];
-                    }
-
-                    // Update Header
-                    if (currentSlide === 4) { 
-                        headerText.innerText = "And finally...";
-                    }
-
-                    // Fade IN text + Add Sparkle
                     captionText.classList.remove('hide-text');
                     headerText.classList.remove('hide-text');
-                    
                     captionText.classList.add('sparkle-effect');
                     if(currentSlide === 4) headerText.classList.add('sparkle-effect');
-
-                }, 500); // 500ms matches the CSS transition time
-
+                }, 500); 
             } else {
                 slideshowContainer.style.display = 'none';
                 proposalDiv.style.display = 'flex';
@@ -475,11 +411,9 @@
             bonusScreen.style.display = 'flex';
         }
 
-        // --- Logic for Final Fading Slideshow ---
         function startFinalSlideshow() {
             let finalIndex = 0;
             const finalImages = document.querySelectorAll('.final-img');
-            
             setInterval(() => {
                 finalImages[finalIndex].classList.remove('active');
                 finalIndex = (finalIndex + 1) % finalImages.length;
@@ -487,7 +421,6 @@
             }, 3000); 
         }
 
-        // --- Floating Hearts Background ---
         function createHeart() {
             const heart = document.createElement('div');
             heart.classList.add('heart-bg');
@@ -500,7 +433,6 @@
         }
         setInterval(createHeart, 500); 
 
-        // --- Confetti Logic ---
         const canvas = document.getElementById('confetti');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -546,5 +478,4 @@
 
     </script>
 </body>
-
 </html>
