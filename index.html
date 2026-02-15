@@ -97,44 +97,19 @@
         }
 
         /* --- Sections Visibility --- */
-        /* Everything hidden by default except logic decides what to show */
-        #slideshow-container, #proposal, #success-msg, #bonus-screen, #start-content {
+        #slideshow-container, #proposal, #success-msg, #bonus-screen {
             display: none;
             width: 100%;
             flex-direction: column;
             align-items: center;
         }
 
-        #countdown-container {
-            display: flex;
+        #start-screen {
+            display: flex; 
             flex-direction: column;
             align-items: center;
             width: 100%;
-        }
-
-        /* --- Countdown Styling --- */
-        #timer {
-            display: flex;
-            gap: 10px;
-            margin: 20px 0;
-        }
-        .time-box {
-            background: rgba(255, 255, 255, 0.6);
-            padding: 10px;
-            border-radius: 10px;
-            min-width: 50px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        .time-val {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #d63384;
-            display: block;
-        }
-        .time-label {
-            font-size: 0.7rem;
-            color: #555;
-            text-transform: uppercase;
+            padding: 20px 0;
         }
 
         /* --- Photos & Frames --- */
@@ -227,21 +202,8 @@
         
         <div id="start-screen">
             <h1>Hey Aakanksha...</h1>
-            
-            <div id="countdown-container">
-                <p>Patience, my love... <br>The surprise unlocks in:</p>
-                <div id="timer">
-                    <div class="time-box"><span class="time-val" id="days">00</span><span class="time-label">Days</span></div>
-                    <div class="time-box"><span class="time-val" id="hours">00</span><span class="time-label">Hrs</span></div>
-                    <div class="time-box"><span class="time-val" id="mins">00</span><span class="time-label">Min</span></div>
-                    <div class="time-box"><span class="time-val" id="secs">00</span><span class="time-label">Sec</span></div>
-                </div>
-            </div>
-
-            <div id="start-content">
-                <p>I wanted to make a little something special just for us. <br>Ready to see?</p>
-                <button class="btn" onclick="startJourney()">Open 💌</button>
-            </div>
+            <p>I wanted to make a little something special just for us. <br>Ready to see?</p>
+            <button class="btn" onclick="startJourney()">Open 💌</button>
         </div>
 
         <div id="slideshow-container">
@@ -293,57 +255,10 @@
 
     <script>
         // ==========================
-        //  COUNTDOWN LOGIC
-        // ==========================
-        
-        // 1. Get current year
-        const currentYear = new Date().getFullYear();
-        
-        // 2. Set the target Date: Feb 14th, 00:00:00
-        // NOTE: Month is 0-indexed in JS (0 = Jan, 1 = Feb). So 1 is February.
-        let targetDate = new Date(currentYear, 1, 14, 0, 0, 0); 
-        
-        // --- TEST MODE ---
-        // Uncomment the line below to simulate that Valentine's Day has already passed (to test the site):
-        // targetDate = new Date(currentYear, 1, 1, 0, 0, 0); // Sets target to Feb 1st (Passed)
-
-        const countdownContainer = document.getElementById('countdown-container');
-        const startContent = document.getElementById('start-content');
-
-        function updateCountdown() {
-            const now = new Date();
-            const diff = targetDate - now;
-
-            if (diff <= 0) {
-                // Time is up! Show the button
-                countdownContainer.style.display = 'none';
-                startContent.style.display = 'flex';
-                clearInterval(timerInterval); // Stop the timer
-                return;
-            }
-
-            // Time is NOT up. Calculate days, hours, mins, secs
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('mins').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('secs').innerText = String(seconds).padStart(2, '0');
-        }
-
-        // Run immediately, then every second
-        updateCountdown();
-        const timerInterval = setInterval(updateCountdown, 1000);
-
-
-        // ==========================
-        //  APP LOGIC
+        //  APP LOGIC (Timer Removed)
         // ==========================
         const buttonTexts = [
-            "Next, my baby girl 💕", "Go on, mi amor 💍", 
+            "Next, my baby girl 💕", "Go on, my wifey 💍", 
             "Look here, sweetheart 😍", "And the masterpiece... ✨", "Ask me! 💘"
         ];
         const captions = [
